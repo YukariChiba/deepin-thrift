@@ -53,7 +53,6 @@ override_dh_auto_clean:
 		$(CURDIR)/lib/go/test/gopath/src/golang.org/x/net \
 		$(CURDIR)/lib/go/test/gopath/src/github.com/golang/mock
 	[ ! -f Makefile ] || $(MAKE) clean
-	cd $(CURDIR)/lib/php/src/ext/thrift_protocol/ && phpize --clean
 	find $(CURDIR) \( -name Makefile -o -name Makefile.in \) -exec rm {} \;
 	find $(CURDIR) -name .dirstamp -exec rm {} \;
 	$(RM) aclocal/libtool.m4 aclocal/lt*
@@ -72,7 +71,7 @@ override_dh_auto_clean:
 
 override_dh_auto_configure:
 	dh_auto_configure -- \
-		--with-cpp --with-c_glib --with-php --with-php_extension \
+		--with-cpp --with-c_glib --without-php \
 		--with-perl --without-python --with-py3 --without-java \
 		--without-nodejs --without-erlang --without-lua \
 		--with-go --with-ruby \
@@ -114,8 +113,6 @@ override_dh_auto_test:
 	cd $(CURDIR)/lib/c_glib/test/ && \
 		$(MAKE) gen-c_glib/t_test_enum_test_types.h
 	mkdir -p $(CURDIR)/vendor/bin/
-	ln -s /usr/bin/phpunit $(CURDIR)/vendor/bin/
-	ln -s $(CURDIR)/lib/php/src/autoload.php $(CURDIR)/vendor/
 	touch $(CURDIR)/test/go/genmock.sh
 	mkdir -p $(CURDIR)/test/go/src/golang.org/x/
 	# symlinks for Go testing
@@ -139,7 +136,7 @@ override_dh_auto_test:
 	dh_auto_test --no-parallel
 
 %:
-	dh $@ --with python3,ruby,phpcomposer
+	dh $@ --with python3,ruby
 
 .PHONY: override_dh_autoreconf override_dh_auto_clean \
 	override_dh_auto_configure override_dh_auto_install \

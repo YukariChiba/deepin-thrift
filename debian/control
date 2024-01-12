@@ -12,7 +12,6 @@ Build-Depends: debhelper-compat (= 13), dh-python,
  qtbase5-dev,
  python3-all-dev, python3-six,
  golang-go, golang-github-golang-mock-dev,
- pkg-php-tools (>= 1.14~), php-dev, phpunit, php-codesniffer,
  perl, libbit-vector-perl, libclass-accessor-perl, libtest-exception-perl,
 # openjdk-11-jdk, javahelper, maven-debian-helper (>= 1.5), ant (>= 1.7), ant-optional,
 # libhttpclient-java, libslf4j-java, libservlet3.1-java (>= 8),
@@ -139,21 +138,6 @@ Description: Python 3 library for Thrift
 # .
 # This package contains Javadoc HTML documentation for libthrift-java .
 #
-Package: php-thrift
-Section: php
-Architecture: any
-Depends: ${phpcomposer:Debian-require}, ${shlibs:Depends}, ${misc:Depends}
-Provides: ${php:Provides}
-Conflicts: php7.0-thrift, php7.2-thrift
-Replaces: php7.0-thrift, php7.2-thrift
-Description: PHP language support for Thrift
- Thrift is a software framework for the development of reliable and
- performant communication and data serialization. It combines a software
- stack with code generation to build services that operate seamlessly
- across a number of different development languages.
- .
- This package provides the PHP language support for Thrift.
-
 Package: libthrift-perl
 Section: perl
 Architecture: all
